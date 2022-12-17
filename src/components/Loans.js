@@ -35,29 +35,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UserList() {
+export default function LoansList() {
   const classes = useStyles();
 
-  const [users, setUsers] = useState([]);
+  const [Loans, setLoans] = useState([]);
   useEffect(() => {
-    UsersGet()
+    LoansGet()
   }, [])
   
-  const UsersGet = () => {
+  const LoansGet = () => {
     fetch("https://www.mecallapi.com/api/users")
       .then(res => res.json())
       .then(
         (result) => {
-          setUsers(result)
+          setLoans(result)
         }
       )
   }
 
-  const UpdateUser = id => {
+  const UpdateLoans = id => {
     window.location = '/update/'+id
   }
 
-  const UserDelete = id => {
+  const LoansDelete = id => {
     var data = {
       'id': id
     }
@@ -74,7 +74,7 @@ export default function UserList() {
       (result) => {
         alert(result['message'])
         if (result['status'] === 'ok') {
-          UsersGet();
+          LoansGet();
         }
       }
     )
@@ -87,7 +87,7 @@ export default function UserList() {
           <Box display="flex">
             <Box flexGrow={1}>
               <Typography component="h2" variant="h6" color="primary" gutterBottom>
-                USERS
+                LOANS
               </Typography>
             </Box>
             <Box align="right">
@@ -102,30 +102,28 @@ export default function UserList() {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="right">ID</TableCell>
-                <TableCell align="center">Avatar</TableCell>
-                <TableCell align="left">First</TableCell>
-                <TableCell align="left">Last</TableCell>
-                <TableCell align="left">Username</TableCell>
+                <TableCell align="center">Customer Id</TableCell>
+                <TableCell align="center">Book Id</TableCell>
+                <TableCell align="left">Loan Date</TableCell>
+                <TableCell align="left">Return Date</TableCell>            
                 <TableCell align="center">Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {users.map((user) => (
-                <TableRow key={user.id}>
-                  <TableCell align="right">{user.id}</TableCell>
+              {Loans.map((Loan) => (
+                <TableRow key={Loan.id}>
+                  <TableCell align="center">{Loan.id}</TableCell>
                   <TableCell align="center">
                     <Box display="flex" justifyContent="center">
-                      <Avatar src={user.avatar} />
+                      <Avatar src={Loan.avatar} />
                     </Box>
                   </TableCell>
-                  <TableCell align="left">{user.fname}</TableCell>
-                  <TableCell align="left">{user.lname}</TableCell>
-                  <TableCell align="left">{user.username}</TableCell>
+                  <TableCell align="left">{Loan.fname}</TableCell>
+                  <TableCell align="left">{Loan.lname}</TableCell>
                   <TableCell align="center">
                     <ButtonGroup color="primary" aria-label="outlined primary button group">
-                      <Button onClick={() => UpdateUser(user.id)}>Edit</Button>
-                      <Button onClick={() => UserDelete(user.id)}>Del</Button>
+                      <Button onClick={() => UpdateLoans(Loan.id)}>Edit</Button>
+                      <Button onClick={() => LoansDelete(Loan.id)}>Del</Button>
                     </ButtonGroup>
                   </TableCell>
                 </TableRow>
