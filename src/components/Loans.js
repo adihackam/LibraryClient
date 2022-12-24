@@ -103,7 +103,7 @@ export default function LoansList() {
             <TableHead>
               <TableRow>
                 <TableCell align="center">Customer Id</TableCell>
-                <TableCell align="center">Book Id</TableCell>
+                <TableCell align="left">Book Id</TableCell>
                 <TableCell align="left">Loan Date</TableCell>
                 <TableCell align="left">Return Date</TableCell>            
                 <TableCell align="center">Action</TableCell>

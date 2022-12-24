@@ -38,7 +38,7 @@ function ResponsiveAppBar() {
   };
 
   const pages = [
-    { name: "App", url: "/" },
+    { name: "Home", url: "/" },
     { name: "Books", url: "/Books" },
     { name: "Customers", url: "/Customers" },
     { name: "Loans", url: "/Loans" },
@@ -89,7 +89,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            LIBRARY WEB
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
