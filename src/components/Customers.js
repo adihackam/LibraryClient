@@ -90,13 +90,13 @@ export default function Customers() {
                             Customers
                         </Typography>
                     </Box>
-                    {/* <Box align="right">
-                        <Link to="/LoansCreate">
+                    <Box align="right">
+                        <Link to="/CustomersCreate">
                             <Button variant="contained" color="primary">
-                                Search
+                                ADD NEW CUSTOMER 
                             </Button>
                         </Link>
-                    </Box> */}
+                    </Box>
                 </Box>
                 <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="simple table">
