@@ -91,13 +91,13 @@ export default function Books() {
                             Books
                         </Typography>
                     </Box>
-                    {/* <Box align="right">
-                        <Link to="/LoansCreate">
+                    <Box align="right">
+                        <Link to="/BooksCreate">
                             <Button variant="contained" color="primary">
-                                Search
+                                ADD NEW BOOK 
                             </Button>
                         </Link>
-                    </Box> */}
+                    </Box>
                 </Box>
                 <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="simple table">
