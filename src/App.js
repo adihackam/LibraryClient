@@ -5,6 +5,8 @@ import Customers from "./components/Customers";
 import Loans from "./components/Loans";
 import LoansCreate from "./components/LoansCreate";
 import HomePage from "./components/HomePage";
+import CustomersCreate from "./components/CustomersCreate";
+import BooksCreate from "./components/BooksCreate";
 
 function App() {
   return (
@@ -17,6 +19,9 @@ function App() {
         <Route path="/Customers" element={<Customers />} />
         <Route path="/Loans" element={<Loans />} />
         <Route path="/LoansCreate" element={<LoansCreate />} />
+        <Route path="/CustomersCreate" element={<CustomersCreate />} />
+        <Route path="/BooksCreate" element={<BooksCreate />} />
+
       </Routes>
     </Router>
   );

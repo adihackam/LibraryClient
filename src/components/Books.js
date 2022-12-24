@@ -45,7 +45,7 @@ export default function Books() {
     }, [])
 
     const BooksGet = () => {
-        fetch("https://www.mecallapi.com/api/users")
+        fetch("http://127.0.0.1:5000/books")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -103,24 +103,20 @@ export default function Books() {
                     <Table className={classes.table} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell align="center">Book Id</TableCell>
-                                <TableCell align="left">Book Name</TableCell>
-                                <TableCell align="left">Book Age</TableCell>
-                                <TableCell align="left">Book City</TableCell>
+                                <TableCell align="center">Name</TableCell>
+                                <TableCell align="left">Author</TableCell>
+                                <TableCell align="left">Year Published</TableCell>
+                                <TableCell align="left">Type</TableCell>
                                 <TableCell align="center">Action</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {Books.map((Book) => (
                                 <TableRow key={Book.id}>
-                                    <TableCell align="center">{Book.id}</TableCell>
-                                    <TableCell align="center">
-                                        <Box display="flex" justifyContent="center">
-                                            <Avatar src={Book.avatar} />
-                                        </Box>
-                                    </TableCell>
-                                    <TableCell align="left">{Book.fname}</TableCell>
-                                    <TableCell align="left">{Book.lname}</TableCell>
+                                    <TableCell align="center">{Book.name}</TableCell>
+                                    <TableCell align="left">{Book.author}</TableCell>
+                                    <TableCell align="left">{Book.yearPublished}</TableCell>
+                                    <TableCell align="left">{Book.type}</TableCell>
                                     <TableCell align="center">
                                         <ButtonGroup color="primary" aria-label="outlined primary button group">
                                             <Button onClick={() => UpdateBooks(Book.id)}>Edit</Button>
