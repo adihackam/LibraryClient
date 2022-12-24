@@ -32,13 +32,11 @@ export default function CustomersCreate() {
   const handleSubmit = event => {
     event.preventDefault();
     var data = {
-      'id': id,
       'name': name,
       'city': city,
       'age': age,
-      'avatar': avatar,
     }
-    fetch('https://www.mecallapi.com/api/users/create', {
+    fetch('http://127.0.0.1:5000/customers', {
       method: 'POST',
       headers: {
         Accept: 'application/form-data',
@@ -50,18 +48,14 @@ export default function CustomersCreate() {
     .then(
       (result) => {
         alert(result['message'])
-        if (result['status'] === 'ok') {
-          window.location.href = '/Customers';
-        }
+        window.location.href = '/Customers';
       }
     )
   }
 
-  const [id, setId] = useState('');
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [age, setAge] = useState('');
-  const [avatar, setAvatar] = useState('');
 
   return (
     <Container maxWidth="xs">
@@ -71,26 +65,13 @@ export default function CustomersCreate() {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="id"
-                label="id"
-                onChange={(e) => setId(e.target.value)}
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
+                id="name"
+                label="Name"
                 onChange={(e) => setName(e.target.value)}
               />
             </Grid>
@@ -99,8 +80,8 @@ export default function CustomersCreate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="username"
-                label="Username"
+                id="city"
+                label="City"
                 onChange={(e) => setCity(e.target.value)}
               />
             </Grid>
@@ -109,19 +90,9 @@ export default function CustomersCreate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
-                label="Email"
+                id="age"
+                label="Age"
                 onChange={(e) => setAge(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="avatar"
-                label="Avatar"
-                onChange={(e) => setAvatar(e.target.value)}
               />
             </Grid>
           </Grid>
