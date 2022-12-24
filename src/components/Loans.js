@@ -44,7 +44,7 @@ export default function LoansList() {
   }, [])
   
   const LoansGet = () => {
-    fetch("https://www.mecallapi.com/api/users")
+    fetch("http://127.0.0.1:5000/loans")
       .then(res => res.json())
       .then(
         (result) => {
@@ -61,21 +61,18 @@ export default function LoansList() {
     var data = {
       'id': id
     }
-    fetch('https://www.mecallapi.com/api/users/delete', {
+    fetch(`http://127.0.0.1:5000/loans/${id}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/form-data',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
     })
     .then(res => res.json())
     .then(
       (result) => {
         alert(result['message'])
-        if (result['status'] === 'ok') {
-          LoansGet();
-        }
+        LoansGet();
       }
     )
   }
@@ -112,14 +109,10 @@ export default function LoansList() {
             <TableBody>
               {Loans.map((Loan) => (
                 <TableRow key={Loan.id}>
-                  <TableCell align="center">{Loan.id}</TableCell>
-                  <TableCell align="center">
-                    <Box display="flex" justifyContent="center">
-                      <Avatar src={Loan.avatar} />
-                    </Box>
-                  </TableCell>
-                  <TableCell align="left">{Loan.fname}</TableCell>
-                  <TableCell align="left">{Loan.lname}</TableCell>
+                  <TableCell align="center">{Loan.customerId}</TableCell>
+                  <TableCell align="center">{Loan.bookId}</TableCell>                  
+                  <TableCell align="left">{Loan.loanDate}</TableCell>
+                  <TableCell align="left">{Loan.returnDate}</TableCell>
                   <TableCell align="center">
                     <ButtonGroup color="primary" aria-label="outlined primary button group">
                       <Button onClick={() => UpdateLoans(Loan.id)}>Edit</Button>

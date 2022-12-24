@@ -28,17 +28,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LoansCreate() {
   const classes = useStyles();
-  
+
   const handleSubmit = event => {
     event.preventDefault();
     var data = {
-      'fname': fname,
-      'lname': lname,
-      'username': username,
-      'email': email,
-      'avatar': avatar,
+      'customer_id': customerId,
+      'book_id': bookId,
     }
-    fetch('https://www.mecallapi.com/api/users/create', {
+    console.log(data)
+    fetch('http://127.0.0.1:5000/loans', {
       method: 'POST',
       headers: {
         Accept: 'application/form-data',
@@ -50,47 +48,28 @@ export default function LoansCreate() {
     .then(
       (result) => {
         alert(result['message'])
-        if (result['status'] === 'ok') {
-          window.location.href = '/Loans';
-        }
+        window.location.href = '/Loans';
       }
     )
   }
-
-  const [fname, setFname] = useState('');
-  const [lname, setLname] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [customerId, setCustomerId] = useState('');
+  const [bookId, setBookId] = useState('');
   return (
     <Container maxWidth="xs">
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          User
+          LOAN DETAILS
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                onChange={(e) => setFname(e.target.value)}
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                onChange={(e) => setLname(e.target.value)}
+                id="customerId"
+                label="Customer ID"
+                onChange={(e) => setCustomerId(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -98,32 +77,13 @@ export default function LoansCreate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="username"
-                label="Username"
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="avatar"
-                label="Avatar"
-                onChange={(e) => setAvatar(e.target.value)}
+                id="bookId"
+                label="Book ID"
+                onChange={(e) => setBookId(e.target.value)}
               />
             </Grid>
           </Grid>
+
           <Button
             type="submit"
             fullWidth
