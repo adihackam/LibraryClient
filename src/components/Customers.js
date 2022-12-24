@@ -44,7 +44,7 @@ export default function Customers() {
     }, [])
 
     const CustomersGet = () => {
-        fetch("https://www.mecallapi.com/api/users")
+        fetch("http://127.0.0.1:5000/customers")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -113,13 +113,9 @@ export default function Customers() {
                             {Customers.map((Customer) => (
                                 <TableRow key={Customer.id}>
                                     <TableCell align="center">{Customer.id}</TableCell>
-                                    <TableCell align="center">
-                                        <Box display="flex" justifyContent="center">
-                                            <Avatar src={Customer.avatar} />
-                                        </Box>
-                                    </TableCell>
-                                    <TableCell align="left">{Customer.fname}</TableCell>
-                                    <TableCell align="left">{Customer.lname}</TableCell>
+                                    <TableCell align="center">{Customer.name}</TableCell>
+                                    <TableCell align="left">{Customer.age}</TableCell>
+                                    <TableCell align="left">{Customer.city}</TableCell>
                                     <TableCell align="center">
                                         <ButtonGroup color="primary" aria-label="outlined primary button group">
                                             <Button onClick={() => UpdateCustomers(Customer.id)}>Edit</Button>
