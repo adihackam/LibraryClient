@@ -11,7 +11,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Avatar from '@material-ui/core/Avatar';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Link } from "react-router-dom";
 
@@ -103,6 +102,7 @@ export default function Books() {
                     <Table className={classes.table} aria-label="simple table">
                         <TableHead>
                             <TableRow>
+                                <TableCell align="center">id</TableCell>
                                 <TableCell align="center">Name</TableCell>
                                 <TableCell align="left">Author</TableCell>
                                 <TableCell align="left">Year Published</TableCell>
@@ -113,6 +113,7 @@ export default function Books() {
                         <TableBody>
                             {Books.map((Book) => (
                                 <TableRow key={Book.id}>
+                                    <TableCell align="center">{Book.id}</TableCell>                                    
                                     <TableCell align="center">{Book.name}</TableCell>
                                     <TableCell align="left">{Book.author}</TableCell>
                                     <TableCell align="left">{Book.yearPublished}</TableCell>
