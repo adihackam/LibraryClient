@@ -13,6 +13,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Link } from "react-router-dom";
+import TextField from '@material-ui/core/TextField';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,11 +42,18 @@ export default function Books() {
 
     const [Books, setBooks] = useState([]);
     useEffect(() => {
-      BooksGet()
+        BooksGet()
     }, [])
 
-    const BooksGet = () => {
-        fetch("http://127.0.0.1:5000/books")
+    const [BookSearch, setBookSearch] = useState([]);
+
+    const BooksGet = (name = '') => {
+        let url = "http://127.0.0.1:5000/books"
+        if (name != '') {
+            url = `http://127.0.0.1:5000/bookSearch/${name}`
+        }
+
+        fetch(url)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -52,6 +61,12 @@ export default function Books() {
                 }
             )
     }
+
+    const doBookSearch = (name) => {
+        BooksGet(name)
+        setBookSearch(name)
+    }
+
 
     const UpdateBooks = id => {
         window.location = '/update/' + id
@@ -93,10 +108,19 @@ export default function Books() {
                     <Box align="right">
                         <Link to="/BooksCreate">
                             <Button variant="contained" color="primary">
-                                ADD NEW BOOK 
+                                ADD NEW BOOK
                             </Button>
                         </Link>
                     </Box>
+                </Box>
+                <Box>
+                    <TextField
+                        variant="outlined"
+                        required
+                        id="BookSearch"
+                        label="Search By Name"
+                        onChange={(e) => doBookSearch(e.target.value)}
+                    />
                 </Box>
                 <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="simple table">
@@ -113,7 +137,7 @@ export default function Books() {
                         <TableBody>
                             {Books.map((Book) => (
                                 <TableRow key={Book.id}>
-                                    <TableCell align="center">{Book.id}</TableCell>                                    
+                                    <TableCell align="center">{Book.id}</TableCell>
                                     <TableCell align="center">{Book.name}</TableCell>
                                     <TableCell align="left">{Book.author}</TableCell>
                                     <TableCell align="left">{Book.yearPublished}</TableCell>
