@@ -70,10 +70,6 @@ export default function LoansList() {
       }) 
   }
 
-  const UpdateLoans = id => {
-    window.location = '/update/'+id
-  }
-
   const LoansDelete = id => {
     var data = {
       'id': id
@@ -107,7 +103,7 @@ export default function LoansList() {
             <Box align="right">
               <Link to="/LoansCreate">
                 <Button variant="contained" color="primary">
-                  CREATE
+                  LOAN
                 </Button>
               </Link>
             </Box>
@@ -133,7 +129,9 @@ export default function LoansList() {
             <TableHead>
               <TableRow>
                 <TableCell align="center">Customer Id</TableCell>
+                <TableCell align="center">Customer Name</TableCell>
                 <TableCell align="left">Book Id</TableCell>
+                <TableCell align="left">Book Name</TableCell>
                 <TableCell align="left">Loan Date</TableCell>
                 <TableCell align="left">Return Date</TableCell>            
                 <TableCell align="center">Action</TableCell>
@@ -143,13 +141,14 @@ export default function LoansList() {
               {Loans.map((Loan) => (
                 <TableRow key={Loan.id}>
                   <TableCell align="center">{Loan.customerId}</TableCell>
-                  <TableCell align="center">{Loan.bookId}</TableCell>                  
+                  <TableCell align="center">{Loan.customerName}</TableCell>
+                  <TableCell align="center">{Loan.bookId}</TableCell>
+                  <TableCell align="center">{Loan.bookName}</TableCell>                                   
                   <TableCell align="left">{Loan.loanDate}</TableCell>
                   <TableCell align="left">{Loan.returnDate}</TableCell>
                   <TableCell align="center">
                     <ButtonGroup color="primary" aria-label="outlined primary button group">
-                      <Button onClick={() => UpdateLoans(Loan.id)}>Edit</Button>
-                      <Button onClick={() => LoansDelete(Loan.id)}>Del</Button>
+                      <Button onClick={() => LoansDelete(Loan.id)}>Return</Button>
                     </ButtonGroup>
                   </TableCell>
                 </TableRow>
