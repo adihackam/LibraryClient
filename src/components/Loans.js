@@ -14,6 +14,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Avatar from '@material-ui/core/Avatar';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Link } from "react-router-dom";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,18 +41,33 @@ export default function LoansList() {
   const classes = useStyles();
 
   const [Loans, setLoans] = useState([]);
+  const [expired, setExpired] = useState(false);
+
   useEffect(() => {
     LoansGet()
   }, [])
   
-  const LoansGet = () => {
-    fetch("http://127.0.0.1:5000/loans")
+  const ExpiredGet = () => {
+    LoansGet(!expired)
+    setExpired(!expired)
+  }
+
+  const LoansGet = (showExpired = false) => {
+    let url = "http://127.0.0.1:5000/loans"
+    if (showExpired) {
+      url = "http://127.0.0.1:5000/expiredLoans"
+    }
+
+    fetch(url)
       .then(res => res.json())
       .then(
         (result) => {
           setLoans(result)
         }
       )
+      .then(() => {
+        console.log("LoansGet")
+      }) 
   }
 
   const UpdateLoans = id => {
@@ -93,6 +110,22 @@ export default function LoansList() {
                   CREATE
                 </Button>
               </Link>
+            </Box>
+            <Box>
+              <FormControlLabel
+                sx={{
+                  display: 'block',
+                }}
+                control={
+                  <Switch
+                    checked={expired}
+                    onChange={ExpiredGet}
+                    name="expired"
+                    color="primary"
+                  />
+                }
+                label="Show Expired loans"
+              />              
             </Box>
           </Box>
           <TableContainer component={Paper}>
