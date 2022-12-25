@@ -45,14 +45,24 @@ export default function Customers() {
     }, [])
     const [searchName, setSearchName] = useState([]);
 
-    const CustomersGet = () => {
-        fetch("http://127.0.0.1:5000/customers")
+    const CustomersGet = (name = '') => {
+        let url = "http://127.0.0.1:5000/customers"
+        if (name != '') {
+            url = `http://127.0.0.1:5000/customersSearch/${name}`
+        }
+
+        fetch(url)
             .then(res => res.json())
             .then(
                 (result) => {
                     setCustomers(result)
                 }
             )
+    }
+
+    const doSearchName = (name) => {
+        CustomersGet(name)
+        setSearchName(name)
     }
 
     const UpdateCustomers = id => {
@@ -105,7 +115,7 @@ export default function Customers() {
                             required
                             id="searchName"
                             label="Search By Name"
-                            onChange={(e) => setSearchName(e.target.value)}
+                            onChange={(e) => doSearchName(e.target.value)}
                         />                        
                     </Box>
                 </Box>
