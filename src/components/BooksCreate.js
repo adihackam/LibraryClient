@@ -5,6 +5,10 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -98,27 +102,34 @@ export default function BooksCreate() {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="type"
-                                label="Type"
-                                onChange={(e) => setType(e.target.value)}
-                            />
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={type}
+                                    label="Type"
+                                    onChange={(e) => setType(e.target.value)}
+                                >
+                                    <MenuItem value={1}>1 - Loan for 10 days</MenuItem>
+                                    <MenuItem value={2}>2 - Loan for 5 days</MenuItem>
+                                    <MenuItem value={3}>3 - Loan for 2 days</MenuItem>
+                                    <MenuItem value={4}>4 - For testing Expired loan</MenuItem>
+                                </Select>
+                            </FormControl>
                         </Grid>
-                    </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Create
-                    </Button>
-                </form>
-            </div>
+                </Grid>
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                >
+                    Create
+                </Button>
+            </form>
+        </div>
         </Container >
     );
 }
