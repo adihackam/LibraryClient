@@ -11,7 +11,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Avatar from '@material-ui/core/Avatar';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Link } from "react-router-dom";
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -71,9 +70,7 @@ export default function LoansList() {
   }
 
   const LoansDelete = id => {
-    var data = {
-      'id': id
-    }
+
     fetch(`http://127.0.0.1:5000/loans/${id}`, {
       method: 'DELETE',
       headers: {

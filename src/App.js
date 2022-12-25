@@ -4,7 +4,7 @@ import Books from "./components/Books";
 import Customers from "./components/Customers";
 import Loans from "./components/Loans";
 import LoansCreate from "./components/LoansCreate";
-import HomePage from "./components/HomePage";
+// import HomePage from "./components/HomePage";
 import CustomersCreate from "./components/CustomersCreate";
 import BooksCreate from "./components/BooksCreate";
 
