@@ -67,6 +67,7 @@ export default function LoansCreate() {
                 variant="outlined"
                 required
                 fullWidth
+                type="number"
                 id="customerId"
                 label="Customer ID"
                 onChange={(e) => setCustomerId(e.target.value)}
@@ -76,6 +77,7 @@ export default function LoansCreate() {
               <TextField
                 variant="outlined"
                 required
+                type="number"
                 fullWidth
                 id="bookId"
                 label="Book ID"

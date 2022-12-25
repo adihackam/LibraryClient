@@ -95,6 +95,7 @@ export default function BooksCreate() {
                                 variant="outlined"
                                 required
                                 fullWidth
+                                type="number"
                                 id="yearPublished"
                                 label="year Published"
                                 onChange={(e) => setYearPublished(e.target.value)}

@@ -90,6 +90,7 @@ export default function CustomersCreate() {
                 variant="outlined"
                 required
                 fullWidth
+                type="number"
                 id="age"
                 label="Age"
                 onChange={(e) => setAge(e.target.value)}
