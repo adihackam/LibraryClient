@@ -14,6 +14,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Avatar from '@material-ui/core/Avatar';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Link } from "react-router-dom";
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,6 +43,7 @@ export default function Customers() {
     useEffect(() => {
         CustomersGet()
     }, [])
+    const [searchName, setSearchName] = useState([]);
 
     const CustomersGet = () => {
         fetch("http://127.0.0.1:5000/customers")
@@ -96,6 +98,15 @@ export default function Customers() {
                                 ADD NEW CUSTOMER 
                             </Button>
                         </Link>
+                    </Box>
+                    <Box>
+                        <TextField
+                            variant="outlined"
+                            required
+                            id="searchName"
+                            label="Search By Name"
+                            onChange={(e) => setSearchName(e.target.value)}
+                        />                        
                     </Box>
                 </Box>
                 <TableContainer component={Paper}>
