@@ -38,7 +38,7 @@ function ResponsiveAppBar() {
   };
 
   const pages = [
-    { name: "Home", url: "/" },
+    { name: "Home", url: "/Books" },
     { name: "Books", url: "/Books" },
     { name: "Customers", url: "/Customers" },
     { name: "Loans", url: "/Loans" },
@@ -78,7 +78,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/Books"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -155,7 +155,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            LIBRARY WEB
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page, index) => (
@@ -174,7 +174,7 @@ function ResponsiveAppBar() {
               </MenuItem>
             ))}
           </Box>
-
+{/* 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -203,7 +203,7 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> */}
         </Toolbar>
       </Container>
     </AppBar>

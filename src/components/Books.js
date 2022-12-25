@@ -67,16 +67,11 @@ export default function Books() {
         setBookSearch(name)
     }
 
-
-    const UpdateBooks = id => {
-        window.location = '/update/' + id
-    }
-
     const BooksDelete = id => {
         var data = {
             'id': id
         }
-        fetch('https://www.mecallapi.com/api/users/delete', {
+        fetch(`http://127.0.0.1:5000/books/${id}`, {
             method: 'DELETE',
             headers: {
                 Accept: 'application/form-data',
@@ -84,15 +79,11 @@ export default function Books() {
             },
             body: JSON.stringify(data),
         })
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    alert(result['message'])
-                    if (result['status'] === 'ok') {
-                        BooksGet();
-                    }
-                }
-            )
+        .then(res => res.json())
+        .then((result) => {
+                alert(result['message'])
+                BooksGet();
+        })
     }
 
     return (
@@ -144,7 +135,6 @@ export default function Books() {
                                     <TableCell align="left">{Book.type}</TableCell>
                                     <TableCell align="center">
                                         <ButtonGroup color="primary" aria-label="outlined primary button group">
-                                            <Button onClick={() => UpdateBooks(Book.id)}>Edit</Button>
                                             <Button onClick={() => BooksDelete(Book.id)}>Del</Button>
                                         </ButtonGroup>
                                     </TableCell>

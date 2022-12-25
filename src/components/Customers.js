@@ -11,7 +11,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Avatar from '@material-ui/core/Avatar';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
@@ -65,15 +64,11 @@ export default function Customers() {
         setSearchName(name)
     }
 
-    const UpdateCustomers = id => {
-        window.location = '/update/' + id
-    }
-
     const CustomersDelete = id => {
         var data = {
             'id': id
         }
-        fetch('https://www.mecallapi.com/api/users/delete', {
+        fetch(`http://127.0.0.1:5000/customers/${id}`, {
             method: 'DELETE',
             headers: {
                 Accept: 'application/form-data',
@@ -85,73 +80,70 @@ export default function Customers() {
             .then(
                 (result) => {
                     alert(result['message'])
-                    if (result['status'] === 'ok') {
-                        CustomersGet();
-                    }
+                    CustomersGet();
                 }
-            )
+            )    
     }
 
-    return (
-        // <div className={classes.root}>
-        <Container className={classes.container} maxWidth="lg">
-            <Paper className={classes.paper}>
-                <Box display="flex">
-                    <Box flexGrow={1}>
-                        <Typography component="h2" variant="h6" color="primary" gutterBottom>
-                            Customers
-                        </Typography>
-                    </Box>
-                    <Box align="right">
-                        <Link to="/CustomersCreate">
-                            <Button variant="contained" color="primary">
-                                ADD NEW CUSTOMER 
-                            </Button>
-                        </Link>
-                    </Box>
-                    <Box>
-                        <TextField
-                            variant="outlined"
-                            required
-                            id="searchName"
-                            label="Search By Name"
-                            onChange={(e) => doSearchName(e.target.value)}
-                        />                        
-                    </Box>
+return (
+    // <div className={classes.root}>
+    <Container className={classes.container} maxWidth="lg">
+        <Paper className={classes.paper}>
+            <Box display="flex">
+                <Box flexGrow={1}>
+                    <Typography component="h2" variant="h6" color="primary" gutterBottom>
+                        Customers
+                    </Typography>
                 </Box>
-                <TableContainer component={Paper}>
-                    <Table className={classes.table} aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell align="center">Customer Id</TableCell>
-                                <TableCell align="left">Customer Name</TableCell>
-                                <TableCell align="left">Customer Age</TableCell>
-                                <TableCell align="left">Customer City</TableCell>
-                                <TableCell align="center">Action</TableCell>
+                <Box align="right">
+                    <Link to="/CustomersCreate">
+                        <Button variant="contained" color="primary">
+                            ADD NEW CUSTOMER
+                        </Button>
+                    </Link>
+                </Box>
+                <Box>
+                    <TextField
+                        variant="outlined"
+                        required
+                        id="searchName"
+                        label="Search By Name"
+                        onChange={(e) => doSearchName(e.target.value)}
+                    />
+                </Box>
+            </Box>
+            <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="center">Customer Id</TableCell>
+                            <TableCell align="left">Customer Name</TableCell>
+                            <TableCell align="left">Customer Age</TableCell>
+                            <TableCell align="left">Customer City</TableCell>
+                            <TableCell align="center">Action</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {Customers.map((Customer) => (
+                            <TableRow key={Customer.id}>
+                                <TableCell align="center">{Customer.id}</TableCell>
+                                <TableCell align="center">{Customer.name}</TableCell>
+                                <TableCell align="left">{Customer.age}</TableCell>
+                                <TableCell align="left">{Customer.city}</TableCell>
+                                <TableCell align="center">
+                                    <ButtonGroup color="primary" aria-label="outlined primary button group">
+                                        <Button onClick={() => CustomersDelete(Customer.id)}>Del</Button>
+                                    </ButtonGroup>
+                                </TableCell>
                             </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {Customers.map((Customer) => (
-                                <TableRow key={Customer.id}>
-                                    <TableCell align="center">{Customer.id}</TableCell>
-                                    <TableCell align="center">{Customer.name}</TableCell>
-                                    <TableCell align="left">{Customer.age}</TableCell>
-                                    <TableCell align="left">{Customer.city}</TableCell>
-                                    <TableCell align="center">
-                                        <ButtonGroup color="primary" aria-label="outlined primary button group">
-                                            <Button onClick={() => UpdateCustomers(Customer.id)}>Edit</Button>
-                                            <Button onClick={() => CustomersDelete(Customer.id)}>Del</Button>
-                                        </ButtonGroup>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Paper>
-        </Container>
-        // </div>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Paper>
+    </Container>
+    // </div>
 
-    );
+);
 }
 
